@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h4 th:text="|Subject: ${gcpEvent.jsonPayload.messagedetail}|"/>
+<h4>Error Detail</h4>
+<h4 th:text="${gcpEvent.jsonPayload.message}"/>
+<h5 th:text="|Log event timestamp: ${gcpEvent.timestamp}|"/>
+<h3>Other error payload data</h3>
+<h4>Main message labels</h4>
+<table>
+    <tr th:each="instance : ${gcpEvent.labels}">
+        <td th:text="${instance.key}">keyvalue</td>
+        <td th:text="${instance.value}">num</td>
+    </tr>
+</table>
+<h3>Resource labels</h3>
+<table>
+    <tr th:each="instance : ${gcpEvent.resource.labels}">
+        <td th:text="${instance.key}">keyvalue</td>
+        <td th:text="${instance.value}">num</td>
+    </tr>
+</table>
+<h4 th:text="|Source of this log entry: ${gcpEvent.logName} |"/>
+<h4 th:text="|This message pertains to the log entry with gcp insertId: ${gcpEvent.insertId} |"/>
+</body>
+</html>
